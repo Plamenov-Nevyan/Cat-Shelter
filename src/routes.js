@@ -1,8 +1,8 @@
-const router = require('express').Router()
-console.log(`aa`);
-const navController = require('./controllers/navController')
-const catsController = require('./controllers/catsController')
-router.use('/', navController)
-router.use('/cats', catsController)
+const router = require('express').Router();
 
-module.exports = router
+const navController = require('./controllers/navController');
+const catsController = require('./controllers/catsController');
+router.use('/', navController);
+router.use('/cats', catsController);
+
+module.exports = router;
