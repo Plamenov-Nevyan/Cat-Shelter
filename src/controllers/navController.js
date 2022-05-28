@@ -11,10 +11,10 @@ router.get('/add/cat',(req, res) => {
     let breeds = services.getAllBreeds();
     res.render('addCat', {breeds});
 });
-router.post('/add/cat', (req, res) => {
+router.post('/add/cat', async (req, res) => {
    if(Object.values(req.body).includes(``)){return res.status(400).send('Invalid request');}
   else{
-    services.saveCat(req.body)
+    services.saveCat(req.body, req)
     .then(response => res.redirect('/'))
     .catch(err => {throw new Error(`${err.message}`)});
   };

@@ -16,10 +16,23 @@ else{
 
 const getAllBreeds = () => breeds;
 
-const saveCat = (newCat) => {
+const saveCat = async (newCat, req) => {
   newCat.id = uuidv4();
+if(req.files.length > 0){
+  let fileExtension = await fileProcessing(req, newCat.id);
+  try{
+    newCat.imageUrl = `/static/images/cat-${newCat.id}.${fileExtension}`;
+    cats.push(newCat);
+    return fs.writeFile(path.resolve('src', 'database', 'cats.json'), JSON.stringify(cats, ``, 4), 'utf-8');
+  }catch(err){
+    throw new Error(`${err.message}`);
+  };
+}
+else {
   cats.push(newCat);
   return fs.writeFile(path.resolve('src', 'database', 'cats.json'), JSON.stringify(cats, ``, 4), 'utf-8');
+}
+
 };
 
 const saveBreed = (newBreed) => {
@@ -38,6 +51,12 @@ const updateCat = (updatedInfo, catId) => {
   return fs.writeFile(path.resolve('src', 'database', 'cats.json'), JSON.stringify(cats, ``, 4), 'utf-8');
 };
 
+const fileProcessing = async (req, catId) => {
+  let fileExtension = req.files[0].originalname.split(`.`)[1];
+ let fileReceived = await fs.readFile(req.files[0].path);
+ await fs.writeFile(`../../Express-and-Handlebars/Cat-Shelter/public/images/cat-${catId}.${fileExtension}`, fileReceived);
+ return fileExtension
+};
 
 module.exports = {
     getOneCat,
@@ -45,5 +64,6 @@ module.exports = {
     getAllBreeds,
     saveCat,
     saveBreed,
-    updateCat
+    updateCat,
+    fileProcessing
 };

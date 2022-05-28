@@ -24,15 +24,31 @@
         "id": "d8165d85-58fd-4929-9346-49afc88ae648"
     },
     {
-        "name": "Bonka",
-        "description": "Gooda white cat",
-        "breed": "Ulichna",
-        "id": "8a4bed83-b26e-4f46-8187-a363ce90f94c"
+        "name": "Marko",
+        "description": "Marko cat",
+        "breed": "Fluffy Cat",
+        "id": "cc339305-8d92-420d-83ff-e37e50ef392b",
+        "imageUrl": "/static/images/cat-cc339305-8d92-420d-83ff-e37e50ef392b.jpg"
     },
     {
-        "name": "Puhco",
-        "description": "Zdrava kotka",
+        "name": "Maya",
+        "description": "Maya cat",
         "breed": "Starozagorska",
-        "id": "80cfa7f6-1824-40c1-841f-754f26f1e4c0"
+        "id": "d64d7f09-3f6e-48d1-ac0a-12362b53926d",
+        "imageUrl": "/static/images/cat-d64d7f09-3f6e-48d1-ac0a-12362b53926d.jpg"
+    },
+    {
+        "name": "Chocko",
+        "description": "Black cute kitty",
+        "breed": "Lyonese",
+        "id": "2cd22098-da26-425e-a6c4-f6e1291d2889",
+        "imageUrl": "/static/images/cat-2cd22098-da26-425e-a6c4-f6e1291d2889.jpg"
+    },
+    {
+        "name": "Iryna",
+        "description": "Cute kitten",
+        "breed": "Lyonese",
+        "id": "e1988b5e-30cc-4839-b8e4-29f3fde96c1d",
+        "imageUrl": "/static/images/cat-e1988b5e-30cc-4839-b8e4-29f3fde96c1d.png"
     }
 ]
