@@ -1,24 +1,27 @@
 const router = require('express').Router();
-const services = require('../services/catsServices');
+const services = require('../services/catsServices')
 
 router.get('/', (req, res) => {
-    let cats = services.getAllCats(req.query);
-    res.render('home', {cats});
+    services.getAllCats(req.query)
+    .then((cats) => {res.render('home', {cats})})
+    .catch(err => {throw new Error(err)})
 });
 
 
 router.get('/add/cat',(req, res) => {
-    let breeds = services.getAllBreeds();
-    res.render('addCat', {breeds});
+     services.getAllBreeds()
+    .then((breeds) => {res.render('addCat', {breeds})})
+    .catch(err => {throw new Error(err.message)})
 });
 router.post('/add/cat', async (req, res) => {
    if(Object.values(req.body).includes(``)){return res.status(400).send('Invalid request');}
   else{
-    services.saveCat(req.body, req)
-    .then(response => res.redirect('/'))
+    services.saveCat(req)
+    .then(() => res.redirect('/'))
     .catch(err => {throw new Error(`${err.message}`)});
-  };
-});
+  }
+})
+
 
 router.get('/add/breed', (req, res) => {
    res.render('addBreed');
