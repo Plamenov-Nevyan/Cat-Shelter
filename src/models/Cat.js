@@ -21,6 +21,10 @@ const catSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 10
+    },
+    owner : {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
     }
 })
 
