@@ -6,6 +6,7 @@ router.get('/edit/:catId', async (req, res) => {
         services.getOneCat(req.params.catId),
         services.getAllBreeds()
     ])
+    console.log(cat.imageUrl);
     let imageFilename = cat.imageUrl.slice(cat.imageUrl.lastIndexOf('/') + 1)
     res.render('editCat', {cat, breeds, imageFilename});
 });
