@@ -24,7 +24,7 @@ router.get('/shelter/:catId', async (req, res) => {
 });
 
 router.post('/shelter/:catId', async (req, res) => {
-    catServices.shelterCat(req.params.catId)
+    catServices.shelterCat(req.params.catId, req.user._id)
     .then(() => res.redirect('/'))
     .catch(err => {throw new Error(`${err.message}`)})
 

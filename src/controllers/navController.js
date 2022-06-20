@@ -73,4 +73,14 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
+router.get('/profile/:userId', (req, res) => {
+    userServices.getUserWithCats(req.params.userId)
+    .then((user) => {
+        user.catsAdded.forEach(cat => cat.isOwner = String(cat.owner._id) == String(user._id))
+        console.log(user.catsSheltered);
+        res.render('profile', {user})
+    })
+    .catch(err => {throw new Error(err.message)})
+})
+
 module.exports = router;

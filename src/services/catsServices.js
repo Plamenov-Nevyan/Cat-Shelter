@@ -1,6 +1,7 @@
 const { Cat } = require('../models/Cat')
 const { Breed } = require('../models/Breed')
 const fs = require('fs/promises');
+const { User } = require('../models/User');
 
 const getOneCat = async (catId) => {
   let cat = await Cat.findById(catId).lean()
@@ -22,20 +23,26 @@ const getAllBreeds = async() => {
 };
 
 const saveCat = async (req) => {
+  req.body.owner = req.user._id
+  let [user, newCat] = await Promise.all([
+  User.findById(req.user._id),
+  Cat.create(req.body),
+ ])
 if(req.files.length > 0){
   try{
-    let newCat = await Cat.create(req.body);
-    let fileExtension = await fileProcessing(req, newCat._id);
+    let fileExtension = await fileProcessing(req, newCat._id)
     newCat.imageUrl = `/static/images/cat-${newCat.id}.${fileExtension}`;
-    newCat.owner = req.user._id
+    user.catsAdded.push(newCat)
     await newCat.save();
+    await user.save()
   }catch(err){
     throw new Error(`${err.message}`);
   };
 }
 else {
-  req.body.owner = req.user._id
-  await Cat.create(req.body);
+  let newCat = await Cat.create(req.body);
+  user.push(newCat)
+  await user.save()
 };
 };
 
@@ -62,8 +69,13 @@ if(Object.keys(newInfo).length > 0){
  await cat.save()
 };
 
-const shelterCat = async(catId) => {
-  await Cat.findOneAndRemove({_id:catId})
+const shelterCat = async(catId, userId) => {
+  let [cat, user] = await Promise.all([
+    Cat.findOneAndRemove({_id:catId}),
+    User.findById(userId)
+  ]) 
+  user.catsSheltered.push(cat)
+  await user.save()
 }
 
 const fileProcessing = async (req, catId) => {

@@ -36,8 +36,19 @@ else{
 
 const checkIfUserExists = (username) => User.exists({username})
 
+const getUserWithCats = (userId) => User.findById(userId)
+.populate({
+    path: 'catsAdded',
+    populate: {
+        path: 'owner',
+        model: 'User'
+    }
+})
+.lean()
+
 
 module.exports = {
     createUser,
-    loginUser
+    loginUser,
+    getUserWithCats
 }

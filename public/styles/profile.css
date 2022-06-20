@@ -1,0 +1,78 @@
+.userInfo {
+    width: 500px;
+    margin: 120px auto 12px;
+    background-color: #fff;
+    padding: 0 20px 20px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    box-shadow: 2px 10px 1.5em 5px black;
+    -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+    text-align: center;
+    height: 200px;
+  }
+  
+  .userInfo > h2 {
+    padding-top: -20px;
+  }
+  
+  .avatar {
+    border-radius: 100px;
+    overflow: hidden;
+    height: 150px;
+    width: 150px;
+    position: relative;
+    margin: auto;
+    top: -60px;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 0 13px #f0f0f0;
+    -webkit-box-shadow: 0 0 0 13px #f0f0f0;
+    -moz-box-shadow: 0 0 0 13px #f0f0f0;
+  }
+  
+.actionLink {
+    display: inline-block;
+    background-color: salmon;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin: 0 8px;
+    text-decoration: none;
+    color: black;
+}
+.actionLink:hover {
+    background-color: #6c8b47;
+    color: white;
+}
+  
+  .avatar img {
+    width: 160px;
+    height: 165px
+  }
+  #addAvatarIcon {
+    height: 40px;
+  }
+
+  #usernamePlaceholder {
+    margin-top: -40px;
+    margin-bottom: 35px;
+  }
+
+  #profilePic {
+    top: -30px;
+  }
+
+  #avatarBtn {
+    opacity: 0.8;
+    border: none;
+    border-radius: 20px;
+    padding: 2px;
+    background-color: darkseagreen;
+    color: cornsilk;
+}
+
+#added-by {
+  text-align: center;
+  margin-top: 30px;
+}

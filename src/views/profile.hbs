@@ -1,0 +1,29 @@
+<main>
+        <div class="userInfo">
+            <div class="avatar"> 
+               <img src="../static/images/anonymous.jpg">
+            </div>
+            <h2 id="usernamePlaceholder">{{user.username}}</h2>
+            <hr>
+        </div>
+        {{#if user.catsAdded}}
+        <h3 id="added-by">Cats added by {{user.username}}:</h3>
+        {{/if}}
+       <section class="cats">
+            <ul>
+                {{#each user.catsAdded}}
+                    {{> cat}}
+                {{/each}}
+            </ul>
+        </section>
+         {{#if user.catsSheltered}}
+        <h3 id="added-by">Cats sheltered by {{user.username}}:</h3>
+        {{/if}}
+       <section class="cats">
+            <ul>
+                {{#each user.catsSheltered}}
+                    {{> cat-sheltered}}
+                {{/each}}
+            </ul>
+        </section>
+    </main>`

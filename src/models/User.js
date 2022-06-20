@@ -14,10 +14,11 @@ const userSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    cats:[{
+    catsAdded:[{
         type: mongoose.Types.ObjectId,
         ref: 'Cat'
-    }]
+    }],
+    catsSheltered: []
 })
 
 const User = mongoose.model('User', userSchema)
