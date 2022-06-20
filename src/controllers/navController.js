@@ -74,11 +74,11 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/profile/:userId', (req, res) => {
+    let userWatching = req.user
     userServices.getUserWithCats(req.params.userId)
     .then((user) => {
         user.catsAdded.forEach(cat => cat.isOwner = String(cat.owner._id) == String(user._id))
-        console.log(user.catsSheltered);
-        res.render('profile', {user})
+        res.render('profile', {user, userWatching})
     })
     .catch(err => {throw new Error(err.message)})
 })

@@ -20,7 +20,7 @@ router.post('/edit/:catId', (req, res) => {
 
 router.get('/shelter/:catId', async (req, res) => {
     let cat = await catServices.getOneCat(req.params.catId);
-    res.render('shelterCat', {cat});
+    res.render('shelterCat', {cat, user:req.user});
 });
 
 router.post('/shelter/:catId', async (req, res) => {
