@@ -20,9 +20,24 @@ const createUser = async (userData) => {
     }
   }
 
+const loginUser = async (userData) => {
+let user = await User.findOne({email:userData.email})
+if(user){
+    let isAuthenticated = await bcrypt.compare(userData.password, user.password) 
+    if(!isAuthenticated){
+        throw new Error('You entered invalid password!')
+    }
+    return user
+}
+else{
+    throw new Error('You entered invalid email!')
+}
+}
+
 const checkIfUserExists = (username) => User.exists({username})
 
 
 module.exports = {
-    createUser
+    createUser,
+    loginUser
 }

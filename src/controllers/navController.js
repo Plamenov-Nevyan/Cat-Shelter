@@ -6,7 +6,12 @@ const jwt = require('jsonwebtoken')
 
 router.get('/', (req, res) => {
     catServices.getAllCats(req.query)
-    .then((cats) => {res.render('home', {cats})})
+    .then((cats) => {
+        cats.forEach((cat) => {
+            if(req.user){cat.isOwner = cat.owner._id == req.user._id}
+        })
+        res.render('home', {cats})
+    })
     .catch(err => {throw new Error(err)})
 });
 
@@ -53,6 +58,13 @@ router.post('/register', (req,res) => {
 
 router.get('/login', (req, res) => {
     res.render('login')
+})
+
+router.post('/login', async (req, res) => {
+  let user = await userServices.loginUser(req.body)
+  let token = jwt.sign({username:user.username, _id:user._id}, authConstants.secret, {expiresIn:'2d'})
+  res.cookie(authConstants.cookieName, token, {httpOnly:true})
+  res.redirect('/')
 })
 
 

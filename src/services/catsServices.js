@@ -7,14 +7,12 @@ const getOneCat = async (catId) => {
   return cat
 };
 
-const getAllCats = async (search) => {
-let cats = await Cat.find().lean()
+const getAllCats = (search) => {
 if(!search.breed){
-  return cats
+  return Cat.find().populate('owner').lean()
 }
 else{
-  let searchedCats = cats.filter(cat => cat.breed.toLowerCase().includes(search.breed.toLowerCase()))
-  return searchedCats;
+  return Cat.find({breed:{$regex: new RegExp(search.breed, 'i')}}).populate('owner').lean()
  };
 };
 
@@ -29,12 +27,14 @@ if(req.files.length > 0){
     let newCat = await Cat.create(req.body);
     let fileExtension = await fileProcessing(req, newCat._id);
     newCat.imageUrl = `/static/images/cat-${newCat.id}.${fileExtension}`;
+    newCat.owner = req.user._id
     await newCat.save();
   }catch(err){
     throw new Error(`${err.message}`);
   };
 }
 else {
+  req.body.owner = req.user._id
   await Cat.create(req.body);
 };
 };

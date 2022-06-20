@@ -2,9 +2,11 @@
     <img src="{{imageUrl}}" alt="Cat Image">
     <h3>{{name}}</h3>
     <p><span>Breed: </span>{{breed}}</p>
-    <p><span>Description: </span>{{description}}</p>
+    <p><span>Price: </span>$ {{price}}</p>
     <ul class="buttons">
+        {{#if isOwner}}
         <li class="btn edit"><a href="/cats/edit/{{_id}}">Change Info</a></li>
-        <li class="btn delete"><a href="/cats/shelter/{{_id}}">New Home</a></li>
+        {{/if}}
+        <li class="btn delete"><a href="/cats/shelter/{{_id}}">Details</a></li>
     </ul>
 </li>
